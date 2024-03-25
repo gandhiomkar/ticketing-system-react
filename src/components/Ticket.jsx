@@ -1,5 +1,6 @@
 import React from "react";
 import "./Ticket.css"; // Import your CSS file for styling
+import "@fortawesome/fontawesome-free/js/all.js";
 
 const Ticket = (props) => {
   // Determine which icon to display based on the isResolved prop

@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Outlet, Link } from "react-router-dom";
 import Ticket from "../../components/Ticket";
 import TicketForm from "../../components/TicketForm";
 import { useAuth } from "../../hooks/AuthProvider";
+import { UserTicketContext } from "../../contexts/UserTIcketContext";
 
 const Dash = () => {
   const auth = useAuth();
@@ -19,6 +20,15 @@ const Dash = () => {
     },
     // Add more card data as needed
   ];
+  const { userTickets } = useContext(UserTicketContext);
+
+  console.log("current state:", userTickets);
+  const [currentState, setCurrentState] = useState(userTickets);
+
+  useEffect(() => {
+    setCurrentState(userTickets);
+  }, [userTickets]);
+
   return (
     <div>
       <div>
@@ -33,7 +43,7 @@ const Dash = () => {
         </Link>
       </div>
       <div className="ticket-list">
-        {cardData.map((card, index) => (
+        {currentState.map((card, index) => (
           <Ticket
             key={index}
             title={card.title}

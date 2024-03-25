@@ -13,13 +13,14 @@ import AdminDash from "./pages/admin/Admin";
 import { AdminTicketProvider } from "./contexts/AdminTicketContext";
 import { TechSupportProvider } from "./contexts/TechSupportContext";
 import TechSupportDash from "./pages/techsupport/TechSupportDashboard";
+import { UserTicketProvider } from "./contexts/UserTIcketContext";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <AuthProvider>
-          <AdminTicketProvider>
+          <UserTicketProvider>
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/login" element={<LoginPage />} />
@@ -27,12 +28,17 @@ function App() {
                 <Route path="/userdash" element={<Dash />} />
                 <Route path="/createticket" element={<TicketForm />} />
               </Route>
-              <Route element={<TechSupportRoute />}>
-                <Route path="/techsupportdash" element={<TechSupportDash />} />
-              </Route>
             </Routes>
+          </UserTicketProvider>
+          <AdminTicketProvider>
             <TechSupportProvider>
               <Routes>
+                <Route element={<TechSupportRoute />}>
+                  <Route
+                    path="/techsupportdash"
+                    element={<TechSupportDash />}
+                  />
+                </Route>
                 <Route element={<AdminRoute />}>
                   <Route path="/admin" element={<AdminDash />} />
                 </Route>

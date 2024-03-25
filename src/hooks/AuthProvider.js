@@ -25,6 +25,7 @@ const AuthProvider = ({ children }) => {
       const res = await response.json();
       if (res) {
         setUser({
+          id: res.user.id,
           email: res.user.email,
           password: res.user.password,
           role: res.user.role,

@@ -20,7 +20,7 @@ const Login = () => {
     e.preventDefault();
     if (formData.email !== "" && formData.password !== "") {
       auth.loginAction(formData);
-      console.log("Form data submitted:", formData);
+      //console.log("Form data submitted:", formData);
       return;
     }
     alert("pleae provide a valid input");
