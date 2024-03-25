@@ -7,13 +7,14 @@ import HomePage from "./pages/Home";
 import PageNotFound from "./pages/NoPage";
 import LoginPage from "./pages/LoginRegister";
 import Dash from "./pages/UserDashboard/Dash";
-import TicketForm from "./components/TicketForm";
+import TicketForm from "./components/CreateTicketForm";
 import { UserRoute, TechSupportRoute, AdminRoute } from "./router/PrivateRoute";
 import AdminDash from "./pages/admin/Admin";
 import { AdminTicketProvider } from "./contexts/AdminTicketContext";
 import { TechSupportProvider } from "./contexts/TechSupportContext";
 import TechSupportDash from "./pages/techsupport/TechSupportDashboard";
 import { UserTicketProvider } from "./contexts/UserTIcketContext";
+import { TechSupportTicketProvider } from "./contexts/TechSupportTicketContext";
 
 function App() {
   return (
@@ -30,8 +31,8 @@ function App() {
               </Route>
             </Routes>
           </UserTicketProvider>
-          <AdminTicketProvider>
-            <TechSupportProvider>
+          <TechSupportProvider>
+            <TechSupportTicketProvider>
               <Routes>
                 <Route element={<TechSupportRoute />}>
                   <Route
@@ -39,16 +40,18 @@ function App() {
                     element={<TechSupportDash />}
                   />
                 </Route>
+              </Routes>
+            </TechSupportTicketProvider>
+            <AdminTicketProvider>
+              <Routes>
                 <Route element={<AdminRoute />}>
                   <Route path="/admin" element={<AdminDash />} />
                 </Route>
               </Routes>
-            </TechSupportProvider>
-          </AdminTicketProvider>
+            </AdminTicketProvider>
+          </TechSupportProvider>
         </AuthProvider>
-        <Routes>
-          <Route path="*" element={<PageNotFound />} />
-        </Routes>
+        <Routes>{/* <Route path="*" element={<PageNotFound />} /> */}</Routes>
       </BrowserRouter>
     </div>
   );

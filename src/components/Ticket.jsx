@@ -9,7 +9,24 @@ const Ticket = (props) => {
   ) : (
     <i className="fas fa-exclamation-circle unresolved-icon"></i>
   );
-
+  const baseUrl = "http://localhost:5000/uploads/";
+  const handleDownloadFile = async (filePath) => {
+    try {
+      const response = await fetch(`${baseUrl}${props.filePath}`);
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filePath; // Function to extract file name from file path
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("Error downloading file:", error);
+    }
+  };
+  console.log(`${baseUrl}${props.filePath}`);
   return (
     <div className="Ticket">
       <img className="ticket-image" src={props.image} alt="Ticket Image" />
@@ -18,6 +35,21 @@ const Ticket = (props) => {
         <p>{props.body}</p>
         <div className="assigned-support">{props.assignedSupport}</div>
         <div className="resolved-status">{resolvedIcon}</div>
+        <div>
+          <strong>File:</strong>
+          <a
+            href={`${baseUrl}${props.filePath}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {props.filePath ? "View / Download File" : "No File Uploaded"}
+          </a>
+          {props.filePath && (
+            <button onClick={() => handleDownloadFile(props.filePath)}>
+              Download
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

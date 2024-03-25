@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Outlet, Link } from "react-router-dom";
 import Ticket from "../../components/Ticket";
-import TicketForm from "../../components/TicketForm";
+import TicketForm from "../../components/CreateTicketForm";
 import { useAuth } from "../../hooks/AuthProvider";
 import { AdminTicketContext } from "../../contexts/AdminTicketContext";
 import { TechSupportContext } from "../../contexts/TechSupportContext";
@@ -9,13 +9,15 @@ import { TechSupportContext } from "../../contexts/TechSupportContext";
 const AdminDash = () => {
   const auth = useAuth();
 
-  const { tickets, updateTicketTechSupport } = useContext(AdminTicketContext);
+  const { tickets, updateTicketTechSupport, handleDeleteTicket } =
+    useContext(AdminTicketContext);
   //console.log(tickets);
   const { techSupports } = useContext(TechSupportContext);
 
-  const handleChangeTechSupport = (ticketId, techSupportId) => {
+  const handleChangeTechSupport = (ticketId, techSupport) => {
     // Call the update function from TicketContext to change the assigned tech support
-    updateTicketTechSupport(ticketId, techSupportId);
+
+    updateTicketTechSupport(ticketId, techSupport);
   };
 
   const [currentState, setCurrentState] = useState(tickets);
@@ -32,21 +34,29 @@ const AdminDash = () => {
       <ul>
         {currentState.map((ticket) => (
           <li key={ticket.id}>
-            ticketid: {ticket.id}, title: {ticket.title},current_ts:{" "}
+            ticketid: {ticket.id}, title: {ticket.title},current_ts:
             {ticket.assignedSupport}
             <select
-              value={ticket.techSupport}
               onChange={(e) =>
-                handleChangeTechSupport(ticket.id, e.target.value)
+                handleChangeTechSupport(ticket.id, JSON.parse(e.target.value))
               }
             >
               <option value="">Select Tech Support</option>
               {techSupports.map((techSupport) => (
-                <option key={techSupport.email} value={techSupport.email}>
+                <option
+                  key={techSupport.id}
+                  value={JSON.stringify({
+                    id: techSupport.id,
+                    email: techSupport.email,
+                  })}
+                >
                   {techSupport.email}
                 </option>
               ))}
             </select>
+            <button onClick={() => handleDeleteTicket(ticket.id)}>
+              Delete
+            </button>
           </li>
         ))}
       </ul>

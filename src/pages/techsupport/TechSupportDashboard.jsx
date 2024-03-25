@@ -1,22 +1,22 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Outlet, Link } from "react-router-dom";
 import Ticket from "../../components/Ticket";
-import TicketForm from "../../components/TicketForm";
+import TicketForm from "../../components/CreateTicketForm";
 import { useAuth } from "../../hooks/AuthProvider";
-import { AdminTicketContext } from "../../contexts/AdminTicketContext";
 import TechSupportTicket from "../../components/TechSupportTicket";
+import { TechSupportTicketContext } from "../../contexts/TechSupportTicketContext";
 
 const TechSupportDash = () => {
   const auth = useAuth();
 
-  const { tickets, updateTicketStatus } = useContext(AdminTicketContext);
+  const { Tickets, updateTicketStatus } = useContext(TechSupportTicketContext);
 
-  const [currentState, setCurrentState] = useState(tickets);
+  const [currentState, setCurrentState] = useState(Tickets);
   //console.log("current state:", currentState);
 
   useEffect(() => {
-    setCurrentState(tickets);
-  }, [tickets]);
+    setCurrentState(Tickets);
+  }, [Tickets]);
 
   return (
     <div>
@@ -34,7 +34,7 @@ const TechSupportDash = () => {
               id={card.id}
               title={card.title}
               body={card.body}
-              image={card.image}
+              filePath={card.filePath}
               assignedSupport={card.assignedSupport}
               isResolved={card.isResolved}
               onToggle={updateTicketStatus}
