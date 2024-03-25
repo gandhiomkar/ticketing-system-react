@@ -1,0 +1,23 @@
+.ticket-list-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Ensure the container covers the full viewport height */
+}
+
+.ticket-list {
+  background-color: #534;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px; /* Add some gap between cards if needed */
+}
+
+/* Additional styles for the Ticket component if needed */
+.Ticket {
+  background-color: #6ff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  /* Add more styles as needed */
+}

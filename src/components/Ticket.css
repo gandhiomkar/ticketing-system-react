@@ -1,0 +1,42 @@
+@import "@fortawesome/fontawesome-free/css/all.css";
+.Ticket {
+  display: flex;
+  width: 400px;
+  height: 400px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  padding: 16px;
+}
+
+.ticket-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 16px;
+}
+
+.Ticket-body {
+  flex-grow: 1;
+}
+
+h2 {
+  margin-bottom: 8px;
+  font-size: 1.5rem;
+}
+
+.assigned-support {
+  margin-bottom: 8px;
+}
+
+.resolved-icon {
+  color: green;
+  margin-right: 8px;
+}
+
+.unresolved-icon {
+  color: red;
+  margin-right: 8px;
+}
