@@ -14,9 +14,15 @@ const SolutionForm = ({ onSubmit, onClose }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // Create a FormData object to send file along with other data
+    const formData = new FormData();
+    formData.append("solution", solution);
+    formData.append("file", file);
     // Submit the form data
-    onSubmit({ solution, file });
+    onSubmit(formData);
     // Close the popup form
+    setSolution("");
+    setFile(null);
     onClose();
   };
 

@@ -31,35 +31,37 @@ const AdminDash = () => {
     <div>
       <h1>Admin Dashboard</h1>
       <h2>All Tickets</h2>
-      <ul>
-        {currentState.map((ticket) => (
-          <li key={ticket.id}>
-            ticketid: {ticket.id}, title: {ticket.title},current_ts:
-            {ticket.assignedSupport}
-            <select
-              onChange={(e) =>
-                handleChangeTechSupport(ticket.id, JSON.parse(e.target.value))
-              }
-            >
-              <option value="">Select Tech Support</option>
-              {techSupports.map((techSupport) => (
-                <option
-                  key={techSupport.id}
-                  value={JSON.stringify({
-                    id: techSupport.id,
-                    email: techSupport.email,
-                  })}
-                >
-                  {techSupport.email}
-                </option>
-              ))}
-            </select>
-            <button onClick={() => handleDeleteTicket(ticket.id)}>
-              Delete
-            </button>
-          </li>
-        ))}
-      </ul>
+
+      {currentState.map((ticket) => (
+        <div>
+          <Ticket
+            key={ticket.id}
+            title={ticket.title}
+            body={ticket.body}
+            assignedSupport={ticket.assignedSupport}
+          />
+
+          <select
+            onChange={(e) =>
+              handleChangeTechSupport(ticket.id, JSON.parse(e.target.value))
+            }
+          >
+            <option value="">Select Tech Support</option>
+            {techSupports.map((techSupport) => (
+              <option
+                key={techSupport.id}
+                value={JSON.stringify({
+                  id: techSupport.id,
+                  email: techSupport.email,
+                })}
+              >
+                {techSupport.email}
+              </option>
+            ))}
+          </select>
+          <button onClick={() => handleDeleteTicket(ticket.id)}>Delete</button>
+        </div>
+      ))}
     </div>
   );
 };
