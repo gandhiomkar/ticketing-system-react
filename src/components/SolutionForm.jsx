@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const SolutionForm = ({ onSubmit, onClose }) => {
+const SolutionForm = ({ id, onSubmit, onClose }) => {
   const [solution, setSolution] = useState("");
   const [file, setFile] = useState(null);
 
@@ -16,6 +16,7 @@ const SolutionForm = ({ onSubmit, onClose }) => {
     e.preventDefault();
     // Create a FormData object to send file along with other data
     const formData = new FormData();
+    formData.append("id", id);
     formData.append("solution", solution);
     formData.append("file", file);
     // Submit the form data

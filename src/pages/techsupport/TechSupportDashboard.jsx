@@ -9,7 +9,9 @@ import { TechSupportTicketContext } from "../../contexts/TechSupportTicketContex
 const TechSupportDash = () => {
   const auth = useAuth();
 
-  const { Tickets, updateTicketStatus } = useContext(TechSupportTicketContext);
+  const { Tickets, updateTicketStatus, addSolution } = useContext(
+    TechSupportTicketContext
+  );
 
   const [currentState, setCurrentState] = useState(Tickets);
   //console.log("current state:", currentState);
@@ -37,7 +39,10 @@ const TechSupportDash = () => {
               filePath={card.filePath}
               assignedSupport={card.assignedSupport}
               isResolved={card.isResolved}
+              solution={card.solution}
+              solutionFile={card.solutionFile}
               onToggle={updateTicketStatus}
+              addSolution={addSolution}
             />
           ))}
         </div>

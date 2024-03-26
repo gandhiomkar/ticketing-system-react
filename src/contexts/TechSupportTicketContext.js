@@ -61,8 +61,27 @@ const TechSupportTicketProvider = ({ children }) => {
     updateTicketStatusAPI(ticketId);
   };
 
+  const addSolution = (data) => {
+    const updatedTickets = Tickets.map((ticket) => {
+      ticket = JSON.parse(JSON.stringify(ticket));
+
+      if (ticket.id == data.get("id")) {
+        return {
+          ...ticket,
+          solution: data.get("solution"),
+          solutionFile: data.get("file").name,
+        };
+      }
+      return ticket;
+    });
+    console.log(updatedTickets);
+    setTickets(updatedTickets);
+  };
+
   return (
-    <TechSupportTicketContext.Provider value={{ Tickets, updateTicketStatus }}>
+    <TechSupportTicketContext.Provider
+      value={{ Tickets, updateTicketStatus, addSolution }}
+    >
       {children}
     </TechSupportTicketContext.Provider>
   );

@@ -56,6 +56,26 @@ const AuthProvider = ({ children }) => {
     }
   };
 
+  const registerAction = async (data) => {
+    try {
+      const response = await fetch("http://localhost:5000/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      const res = await response.json();
+      if (res) {
+        console.log(res);
+        return;
+      }
+      throw new Error(res.message);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const logOut = () => {
     setUser(null);
     setToken("");
@@ -64,7 +84,9 @@ const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ token, user, loginAction, logOut }}>
+    <AuthContext.Provider
+      value={{ token, user, loginAction, logOut, registerAction }}
+    >
       {children}
     </AuthContext.Provider>
   );

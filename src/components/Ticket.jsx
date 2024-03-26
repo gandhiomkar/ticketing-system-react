@@ -50,6 +50,8 @@ const Ticket = (props) => {
             </button>
           )}
         </div>
+        <div className="solution">{props.solution}</div>
+        <div className="solution-file">{props.solutionFile}</div>
       </div>
     </div>
   );

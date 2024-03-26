@@ -20,6 +20,7 @@ const TechSupportTicket = (props) => {
   const handleFormSubmit = (formData) => {
     // Implement your logic to update ticket data (e.g., ticketData) with formData
     console.log("Form Data:", formData);
+    props.addSolution(formData);
     // Close the form
     setIsFormOpen(false);
   };
@@ -41,6 +42,7 @@ const TechSupportTicket = (props) => {
           {/* Render the SolutionForm component as a modal when isFormOpen is true */}
           {isFormOpen && (
             <SolutionForm
+              id={props.id}
               onSubmit={handleFormSubmit}
               onClose={handleCloseForm}
             />
